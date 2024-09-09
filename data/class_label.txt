@@ -1,0 +1,10 @@
+class1 = stir_fried_yellow_noodles
+class2 = krapraw
+class3 = spicy_crispy_chicken_rice
+class4 = padthai
+class5 = yellow_fried_chicken
+class6 = japanese_curry
+class7 = crispy_chicken_rice
+class8 = moo_dang
+class9 = kaw_mun_kai
+class10 = pratoo

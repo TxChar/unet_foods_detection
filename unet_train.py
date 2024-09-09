@@ -20,9 +20,10 @@ from utils.data_loading import BasicDataset, CarvanaDataset
 from utils.dice_score import dice_loss
 
 from torch.utils.tensorboard import SummaryWriter
+torch.cuda.empty_cache()
 
-dir_img = Path('./data/images/')
-dir_mask = Path('./data/dataset/SegmentationClass/')
+dir_img = Path('./data/images')
+dir_mask = Path('./data/dataset/SegmentationClass')
 dir_checkpoint = Path('./checkpoints/')
 
 

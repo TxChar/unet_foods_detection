@@ -19,17 +19,45 @@ from unet import UNet
 from utils.data_loading import BasicDataset, CarvanaDataset
 from utils.dice_score import dice_loss
 
-# from sklearn.metrics import classification_report
-# from sklearn.metrics import precision_recall_curve
-# from sklearn.metrics import precision_score,recall_score
+from sklearn.metrics import precision_recall_curve
 
 from torch.utils.tensorboard import SummaryWriter
+import matplotlib.pyplot as plt
 
 
 dir_img = Path("augmentation_data/sources")
 dir_mask = Path("augmentation_data/masks")
 dir_checkpoint = Path("./augmentation_checkpoints/")
 
+def precision_recall_curve_multiclass_combined(writer, epoch, masks_pred, true_masks, num_classes):
+    true_masks = true_masks.cpu().numpy()
+    masks_pred = F.softmax(masks_pred, dim=1).cpu().detach().numpy()  # Apply softmax for multiclass predictions
+
+    plt.figure(figsize=(8, 6))
+
+    # Loop over each class and compute precision-recall curve for each one
+    for i in range(num_classes):
+        # Binary classification problem for class 'i'
+        true_masks_binary = (true_masks == i).astype(int).ravel()  # True binary labels for class i
+        masks_pred_binary = masks_pred[:, i, :, :].ravel()  # Prediction probabilities for class i
+
+        # Compute precision-recall curve
+        precision, recall, _ = precision_recall_curve(true_masks_binary, masks_pred_binary)
+
+        # Plot precision-recall curve for this class
+        plt.plot(recall, precision, label=f'Class {i}')
+
+    # Add labels, legend and title
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.title('Precision-Recall Curve (Combined)')
+    plt.legend(loc='lower left')
+
+    # Save the plot as an image and log to TensorBoard
+    writer.add_figure(f'Precision-Recall Combined', plt.gcf(), global_step=epoch)
+
+    # Optionally, log the combined plot to WandB as well
+    plt.close()
 
 def train_model(
         model,
@@ -171,6 +199,7 @@ def train_model(
                 
                 writer.add_scalar("Loss/Training Loss", loss.item(), epoch)
                 writer.add_scalar("Loss/Learning Rate", optimizer.param_groups[0]['lr'], epoch)
+                precision_recall_curve_multiclass_combined(writer, epoch, masks_pred, true_masks, num_classes=model.n_classes)
             writer.add_scalar("Loss/Validation", val_score, epoch)
         writer.flush()
 

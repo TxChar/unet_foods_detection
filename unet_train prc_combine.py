@@ -36,7 +36,7 @@ def precision_recall_curve_multiclass_combined(writer, epoch, masks_pred, true_m
     plt.figure(figsize=(8, 6))
 
     # Loop over each class and compute precision-recall curve for each one
-    for i in range(num_classes):
+    for i in range(1, num_classes):
         # Binary classification problem for class 'i'
         true_masks_binary = (true_masks == i).astype(int).ravel()  # True binary labels for class i
         masks_pred_binary = masks_pred[:, i, :, :].ravel()  # Prediction probabilities for class i

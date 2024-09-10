@@ -28,7 +28,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 dir_img = Path("augmentation_data/sources")
 dir_mask = Path("augmentation_data/masks")
-dir_checkpoint = Path("./checkpoints/")
+dir_checkpoint = Path("./augmentation_checkpoints/")
 
 
 def train_model(

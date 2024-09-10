@@ -25,7 +25,7 @@ torch.cuda.empty_cache()
 
 dir_img = Path("data/images")
 dir_mask = Path("data/dataset/SegmentationClassResize")
-dir_checkpoint = Path("./checkpoints/")
+dir_checkpoint = Path("./original_checkpoints/")
 
 
 def train_model(

@@ -4,10 +4,10 @@ from PIL import Image, ImageOps, ImageFilter
 import random
 
 # กำหนดเส้นทางที่เก็บรูปภาพเดิมและที่เก็บรูปภาพใหม่
-imgs_source_folder = "resize_images/sources"  # โฟลเดอร์ที่เก็บไฟล์ imgs
+imgs_source_folder = "data/images"  # โฟลเดอร์ที่เก็บไฟล์ imgs
 imgs_destination_folder = "augmentation_data/sources"  # โฟลเดอร์ที่ต้องการเซฟไฟล์ imgs ใหม่
 
-masks_source_folder = "resize_images/masks/"  # โฟลเดอร์ที่เก็บไฟล์ masks
+masks_source_folder = "data/dataset/SegmentationClassResize"  # โฟลเดอร์ที่เก็บไฟล์ masks
 masks_destination_folder = "augmentation_data/masks"  # โฟลเดอร์ที่ต้องการเซฟไฟล์ masks ใหม่
 
 

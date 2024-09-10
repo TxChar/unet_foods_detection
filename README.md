@@ -1,3 +1,7 @@
+# Command
+- Traning $ python train.py -e 1 -b 4 -c 4 --scale 0.35
+
+
 # U-Net: Semantic segmentation with PyTorch
 <a href="#"><img src="https://img.shields.io/github/actions/workflow/status/milesial/PyTorch-UNet/main.yml?logo=github&style=for-the-badge" /></a>
 <a href="https://hub.docker.com/r/milesial/unet"><img src="https://img.shields.io/badge/docker%20image-available-blue?logo=Docker&style=for-the-badge" /></a>

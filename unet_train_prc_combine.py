@@ -22,6 +22,7 @@ from utils.dice_score import dice_loss
 from torch.utils.tensorboard import SummaryWriter
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_curve
+import matplotlib
 
 torch.cuda.empty_cache()
 
@@ -30,6 +31,7 @@ dir_mask = Path("data/dataset/SegmentationClassResize")
 dir_checkpoint = Path("./original_checkpoints/")
 
 def precision_recall_curve_multiclass_combined(writer, epoch, masks_pred, true_masks, num_classes):
+    matplotlib.use('Agg')
     true_masks = true_masks.cpu().numpy()
     masks_pred = F.softmax(masks_pred, dim=1).cpu().detach().numpy()  # Apply softmax for multiclass predictions
 
